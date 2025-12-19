@@ -15,7 +15,7 @@ output "environment" {
 
 # export the vpc id
 output "vpc_id" {
-  value = aws.vpc_cidr.id
+  value = aws_vpc.vpc.id
 }
 
 # export the internet gateway
