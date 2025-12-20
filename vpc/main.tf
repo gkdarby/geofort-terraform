@@ -1,7 +1,7 @@
 #Create AWS VPC
 resource "aws_vpc" "vpc" {
-  cidr_block       = var.vpc_cidr
-  instance_tenancy = "default"
+  cidr_block           = var.vpc_cidr
+  instance_tenancy     = "default"
   enable_dns_hostnames = "true"
 
   tags = {
@@ -47,7 +47,7 @@ resource "aws_subnet" "public_subnet_az2" {
 
 # create route table and add public route
 resource "aws_route_table" "public_route_table" {
-  vpc_id       = aws_vpc.vpc.id
+  vpc_id = aws_vpc.vpc.id
 
   route {
     cidr_block = "0.0.0.0/0"
