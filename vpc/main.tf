@@ -71,6 +71,16 @@ resource "aws_route_table_association" "public_subnet_2_rt_association" {
   route_table_id = aws_route_table.public_route_table.id
 }
 
+# resource "aws_route_table_association" "public_subnets" {
+#   for_each = {
+#     public_az1 = aws_subnet.public_subnet_az1.id
+#     public_az2 = aws_subnet.public_subnet_az2.id
+#   }
+
+#   subnet_id      = each.value
+#   route_table_id = aws_route_table.public_route_table.id
+# }
+
 # create private app subnet az1
 resource "aws_subnet" "private_app_subnet_az1" {
   vpc_id                  = aws_vpc.vpc.id
