@@ -4,7 +4,7 @@ resource "aws_lb" "application_load_balancer" {
   internal                   = false
   load_balancer_type         = "application"
   security_groups            = [var.alb_security_group_id]
-  subnets                    = [var.public_subnet_az1.id, var.public_subnet_az2.id]
+  subnets                    = [var.public_subnet_az1_id, var.public_subnet_az2_id]
   enable_deletion_protection = false
 
   tags = {
@@ -19,7 +19,6 @@ resource "aws_lb_target_group" "alb_target_group" {
   port        = 80
   protocol    = "HTTP"
   vpc_id      = var.vpc_id
-
   health_check {
     healthy_threshold   = 5
     interval            = 30
@@ -31,6 +30,7 @@ resource "aws_lb_target_group" "alb_target_group" {
     unhealthy_threshold = 2
   }
 }
+
 
 # create a listener on port 80 with redirect action
 resource "aws_lb_listener" "alb_http_listener" {
