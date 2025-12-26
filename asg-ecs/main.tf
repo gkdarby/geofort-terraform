@@ -5,8 +5,6 @@ resource "aws_appautoscaling_target" "ecs_asg" {
   resource_id        = "service/${var.project_name}-${var.environment}-cluster/${var.project_name}${var.environment}-service"
   scalable_dimension = "ecs:service:DesiredCount"
   service_namespace  = "ecs"
-
-  depends_on = [var.ecs_service]
 }
 
 # create scaling policy for the auto scaling group
