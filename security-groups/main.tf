@@ -34,7 +34,7 @@ resource "aws_security_group" "alb_security_group" {
 
 # create security group for the bastion host aka jump box
 resource "aws_security_group" "bastion_security_group" {
-  name        = "${var.environment}-${var.environment}-bastion-sg"
+  name        = "${var.project_name}-${var.environment}-bastion-sg"
   description = "enable ssh access on port 22"
   vpc_id      = var.vpc_id
 
@@ -61,13 +61,13 @@ resource "aws_security_group" "bastion_security_group" {
 # create security group for the app server
 resource "aws_security_group" "app_server_security_group" {
   name        = "${var.project_name}-${var.environment}-app-server-sg"
-  description = "enable http/https access on port 80/443 via alb sg"
+  description = "enable http/https access on port 8080/443 via alb sg"
   vpc_id      = var.vpc_id
 
   ingress {
     description     = "http access"
-    from_port       = 80
-    to_port         = 80
+    from_port       = 8080
+    to_port         = 8080
     protocol        = "tcp"
     security_groups = [aws_security_group.alb_security_group.id]
   }
@@ -83,7 +83,7 @@ resource "aws_security_group" "app_server_security_group" {
   egress {
     from_port   = 0
     to_port     = 0
-    protocol    = "tcp"
+    protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
