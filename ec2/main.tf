@@ -21,6 +21,7 @@ resource "aws_instance" "ec2" {
 
   iam_instance_profile = var.iam_instance_profile
   user_data            = var.user_data
+  user_data_replace_on_change = true
 
   tags = {
     Name = "${var.project_name}-${var.environment}-${var.name_suffix}"
